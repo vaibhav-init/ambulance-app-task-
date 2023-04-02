@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "278697369412",
+    "project_id": "ambulance-app-87eaa",
+    "storage_bucket": "ambulance-app-87eaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278697369412:android:b56982b2a19cf99e7ac111",
+        "android_client_info": {
+          "package_name": "com.example.ambulance_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278697369412-vjeifrfdas8rk53ttbdrtndg6huslrd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP11OeOcsyR0IlNRE76iaHygZgmXZEJI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278697369412-vjeifrfdas8rk53ttbdrtndg6huslrd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
