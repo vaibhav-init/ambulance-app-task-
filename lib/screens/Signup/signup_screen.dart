@@ -1,4 +1,5 @@
 // @dart=2.9
+import 'package:ambulance_tracker/screens/choice_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ambulance_tracker/constants.dart';
 import 'package:ambulance_tracker/screens/Login/login_screen.dart';
@@ -9,6 +10,8 @@ import 'package:ambulance_tracker/Components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatelessWidget {
   @override
@@ -18,59 +21,105 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
-class Body extends StatelessWidget {
+
+class Body extends StatefulWidget {
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool showSpinner = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "SIGNUP",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-            ),
-            SizedBox(height: size.height * 0.03),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              child: Image.asset(
-                "assets/images/hands.png",
-                width: size.width * 0.7,
+      child: ModalProgressHUD(
+        inAsyncCall: showSpinner,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "SIGNUP",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
               ),
-            ),
-            RoundedInputField(
-              hintText: "Your Email",
-              onChanged: (value) {},
-            ),
-            RoundedPasswordField(
-              onChanged: (value) {},
-            ),
-            RoundedButton(
-              text: "SIGNUP",
-              press: () {},
-            ),
-            SizedBox(height: size.height * 0.03),
-            AlreadyHaveAnAccountCheck(
-              login: false,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ),
-                );
-              },
-            ),
-          ],
+              SizedBox(height: size.height * 0.03),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                child: Image.asset(
+                  "assets/images/hands.png",
+                  width: size.width * 0.7,
+                ),
+              ),
+              RoundedInputField(
+                controller: _emailController,
+                hintText: "Your Email",
+                onChanged: (value) {},
+              ),
+              RoundedPasswordField(
+                controller: _passwordController,
+                onChanged: (value) {},
+              ),
+              RoundedButton(
+                text: "SIGNUP",
+                press: () {
+                  setState(() {
+                    showSpinner = true;
+                  });
+                  FirebaseAuth.instance
+                      .createUserWithEmailAndPassword(
+                          email: _emailController.text,
+                          password: _passwordController.text)
+                      .then((value) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChoicePage(),
+                      ),
+                    );
+                  }).onError((error, stackTrace) {
+                    setState(() {
+                      showSpinner = false;
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.red,
+                        duration: const Duration(seconds: 5),
+                        content: Text(
+                          error.toString().substring(30),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 15),
+                        ),
+                      ),
+                    );
+                  });
+                },
+              ),
+              SizedBox(height: size.height * 0.03),
+              AlreadyHaveAnAccountCheck(
+                login: false,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LoginScreen();
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
 class Background extends StatelessWidget {
   final Widget child;
   const Background({
@@ -88,7 +137,6 @@ class Background extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-
           Positioned(
             bottom: 0,
             left: 0,
@@ -140,8 +188,6 @@ class OrDivider extends StatelessWidget {
   }
 }
 
-
-
 class SocalIcon extends StatelessWidget {
   final String iconSrc;
   final Function press;
@@ -174,5 +220,3 @@ class SocalIcon extends StatelessWidget {
     );
   }
 }
-
-

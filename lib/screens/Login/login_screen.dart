@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(30.0),
+                  padding: const EdgeInsets.all(30.0),
                   child: Column(
                     children: <Widget>[
                       FadeAnimation(
@@ -127,9 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       //border: Border(bottom: BorderSide(color: Colors.grey[400]))!
                                       ),
                                   child: TextField(
+                                    controller: _email,
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
-                                        hintText: "Email or Phone number",
+                                        hintText: "Email ",
                                         hintStyle:
                                             TextStyle(color: Colors.grey[400])),
                                   ),
@@ -137,6 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Container(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextField(
+                                    controller: _password,
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText: "Password",
@@ -171,14 +173,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                         email: _email.text,
                                         password: _password.text)
                                     .then((value) {
-                                  Navigator.of(context).push(
+                                  Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           ChoicePage(),
                                     ),
                                   );
                                 }).onError((error, stackTrace) {
-                                  print(error.toString());
+                                  print(
+                                    error.toString(),
+                                  );
 
                                   setState(() {
                                     showSpinner = false;
@@ -187,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.') {
                                     setState(() {
                                       errorText =
-                                          'User Not Found! Please SignUp 🙏';
+                                          'User Not Found! Please SignUp';
                                     });
                                   }
                                   ScaffoldMessenger.of(context).showSnackBar(
