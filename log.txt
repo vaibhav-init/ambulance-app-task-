@@ -1,0 +1,11 @@
+1. flutter clean && flutter pub get 
+
+
+
+
+task 2 : firebase setup in the app -> authentication and firestore 
+
+overwritten google-servies.json file 
+email-password login setup  in the app 
+
+
