@@ -1,14 +1,17 @@
-
 // @dart=2.9
 import 'package:ambulance_tracker/Animation/FadeAnimation.dart';
 import 'package:ambulance_tracker/screens/choice_page.dart';
-import 'package:ambulance_tracker/screens/patient_page.dart';
-impo
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
-
-class LoginScreen extends StatelessWidget {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,19 +108,18 @@ class LoginScreen extends StatelessWidget {
                               children: <Widget>[
                                 Container(
                                   padding: EdgeInsets.all(8.0),
-
                                 ),
                                 Container(
                                   padding: EdgeInsets.all(8.0),
                                   decoration: BoxDecoration(
-                                    //border: Border(bottom: BorderSide(color: Colors.grey[400]))!
-                                  ),
+                                      //border: Border(bottom: BorderSide(color: Colors.grey[400]))!
+                                      ),
                                   child: TextField(
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText: "Email or Phone number",
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[400])),
+                                            TextStyle(color: Colors.grey[400])),
                                   ),
                                 ),
                                 Container(
@@ -127,7 +129,7 @@ class LoginScreen extends StatelessWidget {
                                         border: InputBorder.none,
                                         hintText: "Password",
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[400])),
+                                            TextStyle(color: Colors.grey[400])),
                                   ),
                                 )
                               ],
@@ -148,12 +150,7 @@ class LoginScreen extends StatelessWidget {
                                 ])),
                             child: Center(
                               child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                ChoicePage()));
-                                  },
+                                  onPressed: () {},
                                   child: Text(
                                     "Login",
                                     style: TextStyle(
@@ -181,3 +178,11 @@ class LoginScreen extends StatelessWidget {
         ));
   }
 }
+
+//some changes
+// Navigator.of(context).push(
+// MaterialPageRoute(
+// builder: (BuildContext context) =>
+// ChoicePage(),
+// ),
+// );
