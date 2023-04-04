@@ -103,8 +103,8 @@ class _DriverPageState extends State<DriverPage> {
       onTap: () async {
         currentLoc();
 
-        //address = currLoc.split("{}")[2];
-        //loc = currLoc.split("{}")[1].split(" , ");
+        address = currLoc.split("{}")[2];
+        loc = currLoc.split("{}")[1].split(" , ");
         address = "Patient's address";
         loc = [0, 0];
 
@@ -139,6 +139,6 @@ class _DriverPageState extends State<DriverPage> {
   }
 
   void currentLoc() async {
-    // currLoc = await getLoc();
+    currLoc = await getLoc();
   }
 }

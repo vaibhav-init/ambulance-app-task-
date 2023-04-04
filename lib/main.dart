@@ -15,7 +15,7 @@ void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ChoicePage(),
+      home: WelcomeScreen(),
     ),
   );
 }

@@ -39,7 +39,6 @@ class _AmbulanceBookState extends State<AmbulanceBook> {
       markerId: MarkerId('001'),
       position: LatLng(30.75276, 76.77128),
     ),
-    git
   ];
 
   Future<Uint8List> getBytesFromAssets(String path, int width) async {
