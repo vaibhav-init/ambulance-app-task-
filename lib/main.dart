@@ -1,6 +1,7 @@
 // @dart=2.9
 
 import 'package:ambulance_tracker/screens/ambulance_book.dart';
+import 'package:ambulance_tracker/screens/loading_screen.dart';
 import 'package:ambulance_tracker/screens/patient_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,7 +14,7 @@ void main() async {
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AmbulanceBook(),
+      home: LoadingScreen(),
     ),
   );
 }

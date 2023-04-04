@@ -8,14 +8,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../services/current_location.dart';
 import 'package:ambulance_tracker/dummy_data.dart';
 
-class AmbulanceBook extends StatefulWidget {
-  const AmbulanceBook({Key? key}) : super(key: key);
+class LoadingScreen extends StatefulWidget {
+  const LoadingScreen({Key? key}) : super(key: key);
 
   @override
-  State<AmbulanceBook> createState() => _AmbulanceBookState();
+  State<LoadingScreen> createState() => _LoadingScreenState();
 }
 
-class _AmbulanceBookState extends State<AmbulanceBook> {
+class _LoadingScreenState extends State<LoadingScreen> {
   final List<LatLng> _locations = [
     const LatLng(30.75388, 76.76770),
     const LatLng(30.75847, 76.77508),
@@ -120,7 +120,7 @@ class _AmbulanceBookState extends State<AmbulanceBook> {
                   bottom: 0,
                   right: 0,
                   child: Container(
-                    height: 210,
+                    height: 280,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
