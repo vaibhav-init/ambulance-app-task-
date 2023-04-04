@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:ambulance_tracker/loading%20Animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -69,7 +70,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         } else {
           _mylocation = CameraPosition(
             target: initialcameraposition,
-            zoom: 15,
+            zoom: 16,
           );
         }
       });
@@ -138,37 +139,23 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     ),
                     child: Column(children: [
                       const Text(
-                        "Hey!",
+                        "Searching For An Ambulance Nearby !",
                         style: TextStyle(
                           fontSize: 20,
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Text(
-                        "We are there for you ! ",
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
+                      getAnimation(),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
-                            onPressed: () {},
-                            child: const Text('Book Nearby Ambulance'),
                           ),
+                          onPressed: () {},
+                          child: const Text('Cancel Searching'),
                         ),
                       )
                     ]),
