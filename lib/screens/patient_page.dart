@@ -1,3 +1,4 @@
+import 'package:ambulance_tracker/screens/ambulance_book.dart';
 import 'package:ambulance_tracker/services/MapUtils.dart';
 import 'package:ambulance_tracker/services/current_location.dart';
 import 'package:flutter/material.dart';
@@ -19,33 +20,32 @@ class _PatientPageState extends State<PatientPage> {
   @override
   void initState() {
     super.initState();
-    currentLoc();
+    // currentLoc();
   }
 
   @override
   Widget build(BuildContext context) {
-    currentLoc();
-
+    // currentLoc();
 
     try {
       loc[0];
     } catch (e) {
-      currentLoc();
+      // currentLoc();
     }
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromRGBO(143, 148, 251, 1),
-        ),
-        backgroundColor: Color.fromRGBO(222, 224, 252, 1),
-        body: Center(
-            child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(143, 148, 251, 1),
+      ),
+      backgroundColor: Color.fromRGBO(222, 224, 252, 1),
+      body: Center(
+        child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               ElevatedButton(
                   child: Text("Refresh location"),
                   onPressed: () async {
-                    currentLoc();
+                    // currentLoc();
 
                     date_time = currLoc.split("{}")[0];
                     address = currLoc.split("{}")[2];
@@ -76,72 +76,85 @@ class _PatientPageState extends State<PatientPage> {
                   }),
               ElevatedButton(
                   child: Text("See nearby ambulance"),
-                      onPressed: () async {
-                        MapUtils.openMap2(
-                            double.parse(loc[0]), double.parse(loc[1]));
-                      }),
+                  onPressed: () async {
+                    MapUtils.openMap2(
+                        double.parse(loc[0]), double.parse(loc[1]));
+                  }),
+              ElevatedButton(
+                  child: const Text("Book Ambulance"),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AmbulanceBook(),
+                      ),
+                    );
+                  }),
               Container(
                 child: SingleChildScrollView(
                   child: Column(
                     children: getHosps(),
                   ),
                 ),
-              )
-            ])));
+              ),
+            ]),
+      ),
+    );
   }
 
-  void currentLoc() async {
-    currLoc = await getLoc();
-    date_time = currLoc.split("{}")[0];
-    address = currLoc.split("{}")[2];
-    loc = currLoc.split("{}")[1].split(" , ");
-  }
+  // void currentLoc() async {
+  //   currLoc = await getLoc();
+  //   date_time = currLoc.split("{}")[0];
+  //   address = currLoc.split("{}")[2];
+  //   loc = currLoc.split("{}")[1].split(" , ");
+  // }
 
   List<Widget> getHosps() {
     List<Widget> lst = [];
     for (int i = 1; i <= 4; i++) {
       lst.add(Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Container(
-            width: MediaQuery.of(context).size.width - 50,
-            height: MediaQuery.of(context).size.height / 7,
-            child: Card(
-              child: Column(children: [
-                Text(
-                  "Hospital " + i.toString(),
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                Text("Hospital Location"),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                        icon: Icon(Icons.check),
-                        onPressed: () {
-                          Fluttertoast.showToast(
-                              msg:
-                                  "Hospital chosen, you'll be notified about the ambulance",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              textColor: Colors.white,
-                              fontSize: 16.0);
-                        }),
-                    IconButton(
-                        icon: Icon(Icons.close),
-                        onPressed: () {
-                          Fluttertoast.showToast(
-                              msg:
-                              "Hospital rejected",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              textColor: Colors.white,
-                              fontSize: 16.0);
-                        }),
-                    Icon(Icons.location_on)
-                  ],
-                )
-              ]),
-            )),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width - 50,
+          height: MediaQuery.of(context).size.height / 7,
+          child: Card(
+            child: Column(children: [
+              Text(
+                "Hospital " + i.toString(),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              const Text("Hospital Location"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                      icon: const Icon(Icons.check),
+                      onPressed: () {
+                        Fluttertoast.showToast(
+                            msg:
+                                "Hospital chosen, you'll be notified about the ambulance",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      }),
+                  IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        Fluttertoast.showToast(
+                            msg: "Hospital rejected",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      }),
+                  const Icon(Icons.location_on)
+                ],
+              )
+            ]),
+          ),
+        ),
       ));
     }
 
