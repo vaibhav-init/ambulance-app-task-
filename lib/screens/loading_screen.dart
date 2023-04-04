@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../services/current_location.dart';
-import 'package:ambulance_tracker/dummy_data.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
@@ -29,7 +28,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
     const LatLng(30.76125, 76.78076),
     const LatLng(30.75276, 76.77128),
   ];
-  String imageLocation = 'assets/ambulance.png';
 
   late CameraPosition _mylocation;
   final Completer<GoogleMapController> _controllerGoogleMap =
@@ -70,7 +68,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         } else {
           _mylocation = CameraPosition(
             target: initialcameraposition,
-            zoom: 16,
+            zoom: 18,
           );
         }
       });
@@ -154,7 +152,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           child: const Text('Cancel Searching'),
                         ),
                       )

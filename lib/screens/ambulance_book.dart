@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:ambulance_tracker/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../services/current_location.dart';
-import 'package:ambulance_tracker/dummy_data.dart';
 
 class AmbulanceBook extends StatefulWidget {
   const AmbulanceBook({Key? key}) : super(key: key);
@@ -28,7 +28,6 @@ class _AmbulanceBookState extends State<AmbulanceBook> {
     const LatLng(30.76125, 76.78076),
     const LatLng(30.75276, 76.77128),
   ];
-  String imageLocation = 'assets/ambulance.png';
 
   late CameraPosition _mylocation;
   final Completer<GoogleMapController> _controllerGoogleMap =
@@ -40,6 +39,7 @@ class _AmbulanceBookState extends State<AmbulanceBook> {
       markerId: MarkerId('001'),
       position: LatLng(30.75276, 76.77128),
     ),
+    git
   ];
 
   Future<Uint8List> getBytesFromAssets(String path, int width) async {
@@ -166,7 +166,14 @@ class _AmbulanceBookState extends State<AmbulanceBook> {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoadingScreen(),
+                                ),
+                              );
+                            },
                             child: const Text('Book Nearby Ambulance'),
                           ),
                         ),

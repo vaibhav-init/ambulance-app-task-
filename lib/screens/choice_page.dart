@@ -1,12 +1,25 @@
 // @dart=2.9
 import 'package:ambulance_tracker/Animation/FadeAnimation.dart';
 import 'package:ambulance_tracker/screens/patient_page.dart';
+import 'package:ambulance_tracker/services/current_location.dart';
 import 'package:flutter/material.dart';
 
 import 'driver_page.dart';
 import 'hospital_page.dart';
 
-class ChoicePage extends StatelessWidget {
+class ChoicePage extends StatefulWidget {
+  @override
+  State<ChoicePage> createState() => _ChoicePageState();
+}
+
+class _ChoicePageState extends State<ChoicePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getLoc();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +127,7 @@ class ChoicePage extends StatelessWidget {
                                   Color.fromRGBO(143, 148, 251, .6),
                                 ])),
                             child: Center(
-                              child:ElevatedButton(
+                              child: ElevatedButton(
                                   onPressed: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
@@ -143,7 +156,7 @@ class ChoicePage extends StatelessWidget {
                                   Color.fromRGBO(143, 148, 251, .6),
                                 ])),
                             child: Center(
-                              child:ElevatedButton(
+                              child: ElevatedButton(
                                   onPressed: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
