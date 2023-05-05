@@ -20,4 +20,4 @@ flutter pub get
 
 Step 4: Open in your preferred code editor or IDE eg. VS code or Android Studio :)
 
-YT link -> https://youtube.com/shorts/xYdDBfwR8oI
+
